@@ -1,49 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+
 import Card from '../Card'
 import './style.css'
-
-type Recipe = {
-	id: string
-	name: string
-	img: string
-	description: string
-	createdAt: string
-}
+import { useAppDispatch, useAppSelector } from '../../store/store'
+import { thunks } from '../../store/mainSlice'
 
 export const CardList: React.FC = () => {
-	const [recipes, setRecipes] = useState<Recipe[]>([])
-	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [error, setError] = useState<string | null>(null)
-
+	const dispatch = useAppDispatch()
+	const { list, isLoading } = useAppSelector(state => state.main)
 	useEffect(() => {
-		// Функция для загрузки рецептов
-		const fetchRecipes = async () => {
-			try {
-				const response = await axios.get(
-					'https://663b10d9fee6744a6ea02cea.mockapi.io/cookbook/v1/recipes'
-				)
-				setRecipes(response.data)
-
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			} catch (error: any) {
-				setError(error.message)
-				setIsLoading(false)
-			}
-		}
-
-		fetchRecipes()
+		dispatch(thunks.getData())
 	}, [])
+
 	if (isLoading) {
+		return <span>loading....</span>
+	} else {
 		return (
 			<div className='container'>
-				{recipes.map(data => (
+				{list.map(data => (
 					<Card key={data.id} data={data} />
 				))}
 			</div>
 		)
-	} else {
-		console.log(error)
 	}
 }
 export default CardList
