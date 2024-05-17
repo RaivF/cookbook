@@ -9,4 +9,5 @@ export type Recipe = {
 export interface InitialState {
 	list: Recipe[]
 	isLoading: boolean
+	loadingErrorState: boolean
 }
