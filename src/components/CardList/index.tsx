@@ -10,17 +10,15 @@ import { AlertTitle } from '@mui/material'
 
 export const CardList: React.FC = () => {
 	const dispatch = useAppDispatch()
-	const { list, isLoading, loadingErrorState } = useAppSelector(
-		state => state.main
-	)
+	const { list, isLoading, IError } = useAppSelector(state => state.main)
 	useEffect(() => {
 		dispatch(thunks.getData())
 	}, [])
-
+	console.log(IError)
 	if (isLoading) {
 		return <span>loading....</span>
 	} else {
-		if (loadingErrorState) {
+		if (IError !== null) {
 			return (
 				<Alert severity='error'>
 					<AlertTitle>Error</AlertTitle>

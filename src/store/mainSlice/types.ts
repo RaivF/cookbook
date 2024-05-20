@@ -6,8 +6,12 @@ export type Recipe = {
 	createdAt: string
 }
 
+export type IErrorType = {
+	message: string
+	code: number
+}
 export interface InitialState {
 	list: Recipe[]
 	isLoading: boolean
-	loadingErrorState: boolean
+	IError: IErrorType | null
 }

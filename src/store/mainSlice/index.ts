@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { InitialState, Recipe } from './types'
+import { IErrorType, InitialState, Recipe } from './types'
 import { getData } from './thunks'
 
 export const initialState: InitialState = {
 	list: [],
 	isLoading: false,
-	loadingErrorState: false,
+	IError: null,
 }
 export const mainSlice = createSlice({
 	name: 'main',
@@ -17,8 +17,11 @@ export const mainSlice = createSlice({
 		setIsLoading: (state: InitialState, action: PayloadAction<boolean>) => {
 			return { ...state, isLoading: action.payload }
 		},
-		setError: (state: InitialState, action: PayloadAction<boolean>) => {
-			return { ...state, loadingErrorState: action.payload }
+		setError: (
+			state: InitialState,
+			action: PayloadAction<IErrorType | null>
+		) => {
+			return { ...state, IError: action.payload }
 		},
 	},
 })
