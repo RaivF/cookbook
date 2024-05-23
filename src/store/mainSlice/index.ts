@@ -6,6 +6,7 @@ export const initialState: InitialState = {
 	list: [],
 	isLoading: false,
 	IError: null,
+	editCardName: '',
 }
 export const mainSlice = createSlice({
 	name: 'main',
@@ -22,6 +23,16 @@ export const mainSlice = createSlice({
 			action: PayloadAction<IErrorType | null>
 		) => {
 			return { ...state, IError: action.payload }
+		},
+		editCardName: (
+			state: InitialState,
+			action: PayloadAction<{ id: string; newName: string }>
+		) => {
+			const { id, newName } = action.payload
+			const card = state.list.find(card => card.id === id)
+			if (card) {
+				card.name = newName
+			}
 		},
 	},
 })

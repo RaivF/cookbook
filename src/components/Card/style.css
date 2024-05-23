@@ -26,7 +26,16 @@
 	padding: 10px 0;
 	transition: bottom 0.3s ease;
 }
+.btnChangeName {
+	position: absolute;
+	top: -50px;
 
+	transition: bottom 0.3s ease;
+}
+.card:hover .btnChangeName {
+	top: 0;
+	left: 70%;
+}
 .card:hover .card-info {
 	bottom: 0; /* положение при наведении */
 }
