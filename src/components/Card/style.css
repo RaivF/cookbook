@@ -29,13 +29,24 @@
 .btnChangeName {
 	position: absolute;
 	top: -50px;
-
+	cursor: pointer;
 	transition: bottom 0.3s ease;
 }
 .card:hover .btnChangeName {
 	top: 0;
 	left: 70%;
 }
+.delete {
+	position: absolute;
+	top: -50px;
+	cursor: pointer;
+	transition: bottom 0.3s ease;
+}
+.card:hover .delete {
+	top: 0;
+	left: 0%;
+}
+
 .card:hover .card-info {
 	bottom: 0; /* положение при наведении */
 }

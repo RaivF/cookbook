@@ -1,6 +1,6 @@
-.container {
+.containerCardList {
 	display: flex;
-	margin: 0 auto;
+	margin: auto;
 	width: 80vw;
 	flex-wrap: wrap;
 	justify-content: center;

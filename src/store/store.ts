@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
-import mainReducer from './mainSlice'
+import mainReducer from './mainSlice/cards'
+import sessionReducer from './sessionSlice/index'
 
 export const store = configureStore({
 	reducer: {
 		main: mainReducer,
+		session: sessionReducer,
 	},
 })
 

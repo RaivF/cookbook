@@ -1,0 +1,23 @@
+.head {
+	width: 80vw;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+}
+.buttons {
+	width: 90%;
+	display: flex;
+	margin: 0 auto;
+	justify-content: flex-end;
+}
+span {
+	font-size: 30px;
+}
+.btn1,
+.btn2 {
+	width: 100px;
+	height: 60px;
+}
+.btn1 {
+	margin-right: 100px;
+}

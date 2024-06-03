@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Modal, Box, Typography, TextField, Button } from '@mui/material'
 
 const style = {
@@ -13,16 +12,16 @@ const style = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const BasicModal = (props: any) => {
-	const [inputValue, setInputValue] = useState('  ')
-	const defaultName = inputValue === '  ' ? props.currentName : inputValue
-	const handleInputChange = event => {
-		setInputValue(event.target.value)
+export const ModalLogin = (props: any) => {
+	const handleInputChangeLogin = event => {
+		props.setLogin(event.target.value)
+	}
+	const handleInputChangePass = event => {
+		props.setPass(event.target.value)
 	}
 	const clickHandler = () => {
-		props.rename(inputValue)
+		props.handleLogin()
 		props.closeModal()
-		setInputValue('  ')
 	}
 
 	return (
@@ -35,23 +34,30 @@ export const BasicModal = (props: any) => {
 			>
 				<Box sx={style}>
 					<Typography id='modal-modal-title' variant='h6' component='h2'>
-						Переименовать рецепт
+						Вход
 					</Typography>
 
 					<TextField
 						id='outlined-basic'
-						label='Введите текст'
+						label='Login'
 						variant='outlined'
 						fullWidth
-						value={defaultName}
-						onChange={handleInputChange}
+						onChange={handleInputChangeLogin}
+						sx={{ mt: 2 }}
+					/>
+					<TextField
+						id='outlined-basic'
+						label='Пароль'
+						variant='outlined'
+						fullWidth
+						onChange={handleInputChangePass}
 						sx={{ mt: 2 }}
 					/>
 					<Button
 						sx={{ bgcolor: 'text.secondary', mt: 2 }}
 						onClick={() => clickHandler()}
 					>
-						Переименовать
+						Войти
 					</Button>
 				</Box>
 			</Modal>

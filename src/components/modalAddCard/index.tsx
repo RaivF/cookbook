@@ -13,16 +13,16 @@ const style = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const BasicModal = (props: any) => {
-	const [inputValue, setInputValue] = useState('  ')
-	const defaultName = inputValue === '  ' ? props.currentName : inputValue
+export const ModalAddCard = (props: any) => {
+	const [inputValue, setInputValue] = useState('')
+
 	const handleInputChange = event => {
 		setInputValue(event.target.value)
 	}
 	const clickHandler = () => {
-		props.rename(inputValue)
+		props.newCardName(inputValue)
 		props.closeModal()
-		setInputValue('  ')
+		setInputValue('')
 	}
 
 	return (
@@ -35,7 +35,7 @@ export const BasicModal = (props: any) => {
 			>
 				<Box sx={style}>
 					<Typography id='modal-modal-title' variant='h6' component='h2'>
-						Переименовать рецепт
+						Название блюда
 					</Typography>
 
 					<TextField
@@ -43,7 +43,7 @@ export const BasicModal = (props: any) => {
 						label='Введите текст'
 						variant='outlined'
 						fullWidth
-						value={defaultName}
+						value={inputValue}
 						onChange={handleInputChange}
 						sx={{ mt: 2 }}
 					/>
@@ -51,7 +51,7 @@ export const BasicModal = (props: any) => {
 						sx={{ bgcolor: 'text.secondary', mt: 2 }}
 						onClick={() => clickHandler()}
 					>
-						Переименовать
+						Добавить
 					</Button>
 				</Box>
 			</Modal>
