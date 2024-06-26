@@ -6,9 +6,9 @@ import Card from '../Card'
 import './style.css'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { actionsCard, thunks } from '../../store/mainSlice/cards'
-import { BasicModal } from '../modal'
-import BannerAddCard from '../bannerAddCard/bannerAddCard'
-import { ModalAddCard } from '../modalAddCard'
+import { BasicModal } from '../Modal'
+import BannerAddCard from '../BannerAddCard'
+import { ModalAddCard } from '../ModalAddCard'
 
 export const CardList: React.FC = () => {
 	const [openRenameModal, setOpenRenameModal] = useState(false)
@@ -17,7 +17,7 @@ export const CardList: React.FC = () => {
 	const [currentName, setCurrentName] = useState('')
 
 	const dispatch = useAppDispatch()
-	const { list, isLoading, error } = useAppSelector(state => state.main)
+	const { list, isLoading } = useAppSelector(state => state.main)
 
 	useEffect(() => {
 		dispatch(thunks.getData())
@@ -70,15 +70,6 @@ export const CardList: React.FC = () => {
 		return <span>loading....</span>
 	}
 
-	if (error) {
-		return (
-			<Alert severity='error'>
-				<AlertTitle>Error</AlertTitle>
-				This is an error alert with a scary title.
-			</Alert>
-		)
-	}
-
 	return (
 		<div className='containerCardList'>
 			<BasicModal
@@ -92,8 +83,16 @@ export const CardList: React.FC = () => {
 				closeModal={handleCloseAddModal}
 				newCardName={handleAddCard}
 			/>
-			<BannerAddCard clickHandlerAddCard={handleClickAddCard} />
-			{list.map(data => (
+			{list !== undefined ? (
+				<BannerAddCard clickHandlerAddCard={handleClickAddCard} />
+			) : (
+				<Alert severity='error'>
+					<AlertTitle>Error</AlertTitle>
+					ошибка получения данных с сервера
+				</Alert>
+			)}
+
+			{list?.map(data => (
 				<Card
 					key={data.id}
 					data={data}

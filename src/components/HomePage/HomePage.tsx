@@ -1,14 +1,12 @@
 import './style.css'
 import { CardList } from '../CardList/index'
 import { useState } from 'react'
-import { ModalLogin } from '../modalLogin'
+import { ModalLogin } from '../ModalLogin'
 import { Header } from '../Header'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { actionsSession } from '../../store/sessionSlice/index'
 import { Alert, AlertTitle } from '@mui/material'
-
-const currentLogin = 'user'
-const currentPass = '1234'
+import { checkUser } from '../../store/sessionSlice/api'
 
 const HomePage = () => {
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
@@ -36,10 +34,12 @@ const HomePage = () => {
 		setSuccess(false)
 	}
 
-	const handleLogin = () => {
-		if (login === currentLogin && pass === currentPass) {
+	const handleLogin = async () => {
+		const response = await checkUser(login, pass)
+
+		if (response.token) {
 			setSuccess(true)
-			dispatch(actionsSession.signIn(login))
+			dispatch(actionsSession.signIn({ login: login, token: response.token }))
 		} else {
 			setError(true)
 			console.log('пользователь', login, 'не найден')

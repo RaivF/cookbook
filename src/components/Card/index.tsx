@@ -14,13 +14,13 @@ type CardProp = {
 
 const Card = (props: CardProp) => {
 	const srcImg = `/photo_2018-06-22_14-35-09.jpg`
-	
+
 	return (
 		<div className='card'>
 			<img src={srcImg} alt={props.data.name} />
 			<div className='card-info'>{props.data.name}</div>
 			<button className='btnChangeName' onClick={props.clickHandlerRename}>
-				Изменить имя
+				Изменить название
 			</button>
 			<button className='delete' onClick={props.clickHandlerDelete}>
 				удалить

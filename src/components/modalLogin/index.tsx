@@ -11,6 +11,12 @@ const style = {
 	p: 4,
 }
 
+/**
+ * это компонент модального окна для логина
+ * @param props
+ * @returns
+ */
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ModalLogin = (props: any) => {
 	const handleInputChangeLogin = event => {

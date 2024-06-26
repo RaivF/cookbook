@@ -15,16 +15,20 @@ export const Header = (props: hraderPropsType) => {
 		props.signOut()
 	}
 
+	const btn1 = props.sessionInfo.token ? 'btn1 hide' : 'btn1'
+	const btn2 = props.sessionInfo.token ? 'btn1' : 'btn1 hide'
 	return (
 		<div className='head'>
-			<span>{`hi ${
-				props.sessionInfo.isLogged === false ? '' : props.sessionInfo.login
+			<span>{`${
+				props.sessionInfo.isLogged === false || props.sessionInfo.login === null
+					? ''
+					: 'Привет ' + props.sessionInfo.login
 			}`}</span>
 			<div className='buttons'>
-				<button className='btn1' onClick={handlerOpenLoginModal}>
+				<button className={btn1} onClick={handlerOpenLoginModal}>
 					Войти
 				</button>
-				<button className='btn2' onClick={handlerSingOut}>
+				<button className={btn2} onClick={handlerSingOut}>
 					Выйти
 				</button>
 			</div>

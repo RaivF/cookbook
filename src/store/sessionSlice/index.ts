@@ -2,15 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface SessionState {
 	sessionInfo: {
-		isLogged: boolean
 		login: string | null
+		token: string | null
 	}
 }
 
-const initialState: SessionState = {
+export const initialState: SessionState = {
 	sessionInfo: {
-		isLogged: false,
 		login: null,
+		token: null,
 	},
 }
 
@@ -18,13 +18,16 @@ const sessionSlice = createSlice({
 	name: 'session',
 	initialState,
 	reducers: {
-		signIn: (state, action: PayloadAction<string>) => {
-			state.sessionInfo.isLogged = true
-			state.sessionInfo.login = action.payload
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		signIn: (state, action: PayloadAction<any>) => {
+			state.sessionInfo.login = action.payload.login
+			state.sessionInfo.token = action.payload.token
+			localStorage.setItem('token', action.payload.token)
 		},
 		signOut: state => {
-			state.sessionInfo.isLogged = false
 			state.sessionInfo.login = null
+			state.sessionInfo.token = null
+			localStorage.removeItem('token')
 		},
 	},
 })

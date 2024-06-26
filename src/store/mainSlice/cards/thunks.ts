@@ -1,5 +1,3 @@
-// src/store/cards/thunks.ts
-
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { fetchRecipes } from './api'
 import { actionsCard } from '.'
@@ -11,7 +9,6 @@ export const getData = createAsyncThunk<void, void>(
 
 		try {
 			const data = await fetchRecipes()
-
 			dispatch(actionsCard.getData(data))
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
